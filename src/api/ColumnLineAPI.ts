@@ -1,21 +1,21 @@
 import axios from 'axios';
 
-const StatisticsCardAPI  = async (deviceLabel : string, telemetry : string, title : string) => {
+const ColumnLineAPI  = async (textSearch : string, type : Object) => {
     const BASE_URL = "http://localhost:7001/api";
 
     const token = localStorage.getItem("token");
+    // const customerID = localStorage.getItem("SelectedCustomerId");
 
     if(!token) {
         throw new Error("JWT not found!")
     }else {
         const body = {
             "token" : token,
-            "deviceLabel" : deviceLabel,
-            "telemetry" : telemetry,
-            "title" : title,
+            "textSearch" : textSearch,
+            "type" : type,
         };
         try {
-            const response = await axios.post(`${BASE_URL}/v1/getStatisticsData`, body);
+            const response = await axios.post(`${BASE_URL}/v1/getColumnLine`, body);
             return response;
         } catch (error) {
             console.error(error)
@@ -23,4 +23,4 @@ const StatisticsCardAPI  = async (deviceLabel : string, telemetry : string, titl
     }
 }
 
-export default StatisticsCardAPI;
+export default ColumnLineAPI;
